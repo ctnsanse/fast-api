@@ -1,13 +1,14 @@
-from urllib import response
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from tortoise.contrib.fastapi import HTTPNotFoundError, register_tortoise
+from urllib import response
+
 from models import (
     Life_Pydantic,
     LifeIn_Pydantic,
     LifeInput,
     LifeInput_Pydantic
 )
-from tortoise.contrib.fastapi import HTTPNotFoundError, register_tortoise
-from pydantic import BaseModel
 
 # créer le post create 
 
@@ -16,7 +17,6 @@ class Message(BaseModel):
 
 
 app = FastAPI()
-
 
 @app.post("/life", response_model=LifeInput_Pydantic)
 async def create(life: LifeInput_Pydantic):
